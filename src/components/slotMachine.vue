@@ -6,7 +6,7 @@
     <h1 class="text-3xl text-center font-bold mb-6">Slot Machine</h1>
     <!-- End Title -->
     <!-- Slot Machine -->
-    <div class="bg-white px-6 py-4 my-3 w-1/4 mx-auto shadow rounded-md">
+    <div v-if="tokens > 0" class="bg-white px-6 py-4 my-3 w-1/4 mx-auto shadow rounded-md">
       <div class="grid grid-cols-3 gap-2 mx-auto w-full block p-2 pb-20 justify-items-center">
         <div v-for="(spinre, index) in spinre" :key="index">
             <p>{{ spinre }}</p>
@@ -22,6 +22,11 @@
         <button @click="bet = 15" type="button" class="border border-gray-300 text-gray-700 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"> 15</button>
         <button @click="bet = 20" type="button" class="border border-gray-300 text-gray-700 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"> 20</button>
       </div>
+    </div>
+
+    <div v-else class="bg-white px-6 py-4 my-3 w-1/4 mx-auto shadow rounded-md text-center justify-items-center block">
+       <p> You Lost</p>
+        <button @click="tokens = 50" class=" border border-gray-300 text-gray-700 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline">Restart with 50 Tokens</button>
     </div>
     <!-- End Outline -->
   </div>
@@ -56,16 +61,17 @@ export default {
         spin(){
             let rnd = [this.getRandomInt(4),this.getRandomInt(4),this.getRandomInt(4)];
             this.spinre = rnd;
+            this.tokens -= this.bet;
             for (var i = 0; i < this.score.length; ++i) {
                 let current = this.score[i]
                 if (JSON.stringify(current.data) === JSON.stringify(rnd)) {
                     this.tokens += (current.value * this.bet);
-                }else{
+                }
+                else{
                     for (var j = 0; j < rnd.length; ++j) {
                         this.tokens += Number(rnd[j]);
                     }
                 }
-                this.tokens -= this.bet;
             }
             return rnd;
         },
