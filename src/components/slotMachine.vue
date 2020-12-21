@@ -1,9 +1,9 @@
 <template>
 
-<div class="w-screen h-screen flex items-center justify-center bg-gray-100">
+<div class="w-screen h-screen flex items-center justify-center bg-gray-100 dark:bg-black">
   <div class="w-full mx-auto py-16">
     <!-- Title -->
-    <h1 class="text-3xl text-center font-bold mb-6">Slot Machine</h1>
+    <h1 class="text-3xl text-center font-bold mb-6 dark:text-white">Slot Machine</h1>
     <!-- End Title -->
     <!-- Slot Machine -->
     <div v-if="tokens > 0" class="bg-white px-6 py-4 my-3 w-1/4 mx-auto shadow rounded-md">
@@ -38,9 +38,9 @@
 <script>
 export default {
   name: "slotMachine",
-    mounted() {
-        console.log('Component mounted.')
-    },
+    // mounted() {
+    //     console.log('Component mounted.')
+    // },
     props: {
 
     },
