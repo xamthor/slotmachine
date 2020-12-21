@@ -2,11 +2,12 @@
 
 	<button @click="darkThemeSwitch"
         type="button"
-        class="border border-gray-700 text-gray-700 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-gray-800 focus:outline-none focus:shadow-outline absolute top-0 right-0 
+        class=" text-gray-700 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-gray-800 focus:outline-none focus:shadow-outline absolute top-0 right-0 
 
-        dark:text-white dark:border-white"
+        dark:text-white"
         >
-          Toggle
+          <i class="far fa-moon" v-if="mode == 'dark'"></i>
+          <i class="fas fa-sun" v-else-if="mode == 'light'"></i>
         </button>
 
 	<slotMachine />
@@ -37,10 +38,13 @@ export default {
 
 		if (document.querySelector('html').classList.contains('dark')) 
 		{
-			localStorage.theme = 'dark'
+			localStorage.theme = 'dark';
+			this.mode = localStorage.theme;
+
 		}else
 		{
-			localStorage.theme = 'light'
+			localStorage.theme = 'light';
+			this.mode = localStorage.theme;
 		}
 		
 
